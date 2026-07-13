@@ -18,6 +18,35 @@
  *
  */
 function checkGuess(guess, solution) {
+  let correctPlace = 0;
+  let common = 0;
+
+  // Count total matching characters
+  const checked = new Set();
+
+  for (const char of guess) {
+    if (!checked.has(char)) {
+      checked.add(char);
+
+      const guessCount = [...guess].filter(c => c === char).length;
+      const solutionCount = [...solution].filter(c => c === char).length;
+
+      common += Math.min(guessCount, solutionCount);
+    }
+  }
+
+  // Count characters in the correct position
+  for (let i = 0; i < guess.length; i++) {
+    if (guess[i] === solution[i]) {
+      correctPlace++;
+    }
+  }
+
+  // Characters in the wrong position
+  const wrongPlace = common - correctPlace;
+
+  return `${correctPlace}-${wrongPlace}`;
+  
   // TODO: complete this function
   // first determine how many characters total the two strings have in common
   // This may help:
