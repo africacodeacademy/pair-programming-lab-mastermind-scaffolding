@@ -22,14 +22,14 @@ function checkGuess(guess, solution) {
   let common = 0;
 
   // Count total matching characters
-  const checked = new Set();
+  const checked = new Set();// Keep track of characters already counted
 
   for (const char of guess) {
     if (!checked.has(char)) {
       checked.add(char);
 
-      const guessCount = [...guess].filter(c => c === char).length;
-      const solutionCount = [...solution].filter(c => c === char).length;
+      const guessCount = [...guess].filter(c => c === char).length;// Count occurrences of char in guess
+      const solutionCount = [...solution].filter(c => c === char).length;// Count occurrences of char in solution
 
       common += Math.min(guessCount, solutionCount);
     }
@@ -37,10 +37,11 @@ function checkGuess(guess, solution) {
 
   // Count characters in the correct position
   for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === solution[i]) {
+    if (guess[i] === solution[i]) {// Check if characters match at the same position
       correctPlace++;
     }
   }
+
 
   // Characters in the wrong position
   const wrongPlace = common - correctPlace;
